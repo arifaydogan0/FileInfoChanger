@@ -26,7 +26,7 @@
                 <TextBlock x:Name="degistirilmeTarihiTextBlock" Text="Değiştirilme Tarihi:" Margin="0,0,10,0" Height="25"/>
                 <DatePicker x:Name="degistirilmeTarihiDatePicker" Grid.Column="1" HorizontalAlignment="Right" Height="25"/>
             </Grid>
-            <!-- Diğer meta bilgileri için TextBlock'lar -->
+            
             <Button Content="Değiştir" Click="Change_Click" Height="25" Width="75"/>
         </StackPanel>
     </Grid>
