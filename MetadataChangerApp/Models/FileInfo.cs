@@ -7,6 +7,5 @@ namespace MetadataChangerApp.Models
         public DateTime CreationTime { get; set; }
         public DateTime LastWriteTime { get; set; }
 
-        // Diğer meta bilgilerini ekleyin
     }
 }
