@@ -66,7 +66,6 @@ namespace MetadataChangerApp
 
                 MetadataChangerApp.Models.FileInfo newInfo = new()
                 {
-                    // Eğer MetadataChangerApp.Models.FileInfo sınıfına CreationTime ve LastWriteTime eklediyseniz bu değerleri de set etmelisiniz.
                     CreationTime = newCreationTime,
                     LastWriteTime = newLastWriteTime
                 };
