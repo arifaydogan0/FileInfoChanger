@@ -46,15 +46,31 @@ namespace MetadataChangerApp
                 return;
             }
 
-            MetadataChangerApp.Models.FileInfo newInfo = new()
-            {
-                // Eğer MetadataChangerApp.Models.FileInfo sınıfına CreationTime ve LastWriteTime eklediyseniz bu değerleri de set etmelisiniz.
-                CreationTime = olusturulmaTarihiDatePicker.DisplayDate,
-                LastWriteTime = degistirilmeTarihiDatePicker.DisplayDate
-            };
-
             try
             {
+                MetadataChangerApp.Models.FileInfo fileInfo = fileService.GetFileInfo(FocusedPath);
+
+                // Seçilen dosyanın creation zamanının saat, dakika, saniye, milisaniye vs bilgilerini değiştirmeyerek al
+                DateTime newCreationTime = new DateTime(
+                    olusturulmaTarihiDatePicker.SelectedDate!.Value.Year,
+                    olusturulmaTarihiDatePicker.SelectedDate.Value.Month,
+                    olusturulmaTarihiDatePicker.SelectedDate.Value.Day,
+                    fileInfo.CreationTime.Hour,
+                    fileInfo.CreationTime.Minute,
+                    fileInfo.CreationTime.Second,
+                    fileInfo.CreationTime.Millisecond
+                );
+
+                // Seçilen dosyanın lastwritetime'ını güncellenen creationtime'ın bir saniye sonrası olarak ayarla
+                DateTime newLastWriteTime = newCreationTime.AddSeconds(1);
+
+                MetadataChangerApp.Models.FileInfo newInfo = new()
+                {
+                    // Eğer MetadataChangerApp.Models.FileInfo sınıfına CreationTime ve LastWriteTime eklediyseniz bu değerleri de set etmelisiniz.
+                    CreationTime = newCreationTime,
+                    LastWriteTime = newLastWriteTime
+                };
+
                 fileService.ChangeFileInfo(FocusedPath, newInfo);
                 MessageBox.Show("Meta bilgileri başarıyla değiştirildi.", "Bilgi", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -63,5 +79,7 @@ namespace MetadataChangerApp
                 MessageBox.Show($"Hata oluştu: {ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
     }
 }
