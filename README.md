@@ -1,1 +1,1 @@
-# MetadataChangerApp
+# ChangerFileInfo
