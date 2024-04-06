@@ -16,7 +16,7 @@ namespace MetadataChangerApp
         public MainWindow()
         {
             InitializeComponent();
-            fileService = new FileService();
+            fileService = new FileService();        
         }
 
         private void ChooseFile_Click(object sender, RoutedEventArgs e)
